@@ -139,7 +139,7 @@ function updateCountries(data) {
                     linkedHTML = `<span>(see also `;
                     linkedHTML += country.linked_countries.map(linked =>
                         `<img src="${linked.flag_icon || 'images/flag.png'}" alt="${linked.name}"> 
-                             <a href="/country/${linked.slug}">${linked.name}</a>`
+                             <a href="${linked.slug}">${linked.name}</a>`
                     ).join(", ");
                     linkedHTML += `)</span>`;
                 }
@@ -149,7 +149,7 @@ function updateCountries(data) {
                     <div class="list-item">
                         <img src="${country.flag_icon || 'images/flag.png'}" alt="${country.name}">
                         <div class="list-item-in">
-                           <a href="/country/${country.slug}">${country.name}</a>
+                           <a href="${country.slug}">${country.name}</a>
                                 ${linkedHTML}
                         </div>
                     </div>

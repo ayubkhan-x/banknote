@@ -3,10 +3,10 @@ ob_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$host = '';
-$user = '';
-$pass = '';
-$db_name = '';
+$host = 'mysql8';
+$user = '39330634_banknotewiki';
+$pass = 'eWgl1bn8';
+$db_name = '39330634_banknotewiki';
 
 $conn = new mysqli($host, $user, $pass, $db_name);
 
@@ -16,30 +16,27 @@ if ($conn->connect_errno) {
 
 $conn->set_charset("utf8mb4");
 
-// Получаем slug страны из URL
 $slug = isset($_GET['slug']) ? $conn->real_escape_string($_GET['slug']) : '';
 
 if (!$slug) {
     die("Страна не найдена.");
 }
 
-// Получаем данные о валюте выбранной страны
 $sql = "SELECT * FROM c_currency WHERE country_id = (SELECT id FROM countries WHERE slug = '$slug') ORDER BY order_id ASC";
 $currency_result = $conn->query($sql);
 $currencies = $currency_result->fetch_all(MYSQLI_ASSOC);
 
-// Получаем все выпуски валюты
 $sql = "SELECT * FROM c_issue ORDER BY order_id ASC";
 $issue_result = $conn->query($sql);
 $issues = $issue_result->fetch_all(MYSQLI_ASSOC);
 
-// Получаем все банкноты
 $sql = "SELECT * FROM banknotes ORDER BY order_id ASC";
 $banknote_result = $conn->query($sql);
 $banknotes = $banknote_result->fetch_all(MYSQLI_ASSOC);
 
 $conn->close();
 ?>
+
 
 <div class="row main-content">
     <div class="col-xl-9 col-lg-12 content">
@@ -82,244 +79,132 @@ $conn->close();
                                 <?php foreach ($currencies as $currency): ?>
                                     <div class="tab-title spy" id="currency-<?= $currency['id']; ?>">
                                         <h3 class="title-tab">
-                                            <?php if (!empty($currency['ext_link'])): ?>
-                                                <a href="<?= htmlspecialchars($currency['ext_link']); ?>">
-                                                    <?= htmlspecialchars($currency['ext_link_text']); ?>
-                                                </a>
-                                            <?php else: ?>
-                                                <?= htmlspecialchars($currency['name']); ?>
-                                            <?php endif; ?>
+                                            <?= htmlspecialchars($currency['name']); ?>
                                         </h3>
                                     </div>
-                                    <div class="note">
-                                        <a href="#!"><img src="/images/clip-icon.svg" alt=""> Please follow the link to find
-                                            Soviet banknotes</a>
-                                    </div>
-                                    <?php foreach ($issues as $issue): ?>
-                                        <?php if ($issue['currency_id'] == $currency['id']): ?>
-                                            <div class="full-box">
-                                                <span class="full-title spy" id="issue-<?= $issue['id']; ?>">
-                                                    <?= htmlspecialchars($issue['name']); ?>
-                                                </span>
+                                    <?php if (!empty($currency['ext_link'])): ?>
 
-                                                <?php foreach ($banknotes as $banknote): ?>
-                                                    <?php if ($banknote['issue_id'] == $issue['id']): ?>
-                                                        <div class="full-item">
-                                                            <div class="full-img">
-                                                                <span><img src="/images/<?= htmlspecialchars($banknote['img_back']); ?>"
-                                                                        alt=""></span>
-                                                                <span><img src="/images/<?= htmlspecialchars($banknote['img_front']); ?>"
-                                                                        alt=""></span>
+                                        <div class="note ext-link-block">
+                                            <a href="<?= htmlspecialchars($currency['ext_link']); ?>">
+                                                <?= htmlspecialchars($currency['ext_link_text']); ?>
+                                            </a>
+                                        </div>
+                                    <?php endif; ?>
+                                    <?php if (empty($currency['ext_link'])): ?>
+                                        <?php foreach ($issues as $issue): ?>
+                                            <?php if ($issue['currency_id'] == $currency['id']): ?>
+                                                <div class="full-box">
+                                                    <span class="full-title spy" id="issue-<?= $issue['id']; ?>">
+                                                        <?= htmlspecialchars($issue['name']); ?>
+                                                    </span>
+
+                                                    <?php foreach ($banknotes as $banknote): ?>
+                                                        <?php if ($banknote['issue_id'] == $issue['id']): ?>
+                                                            <div class="full-item">
+                                                                <div class="full-img">
+                                                                    <div class="full-money-img">
+                                                                        <span>
+                                                                            <img width="222"
+                                                                                src="/banknotes/<?= $banknote['country_id']; ?>/<?= htmlspecialchars($banknote['img_front']); ?>"
+                                                                                alt="">
+                                                                        </span>
+                                                                        <span>
+                                                                            <img width="222"
+                                                                                src="/banknotes/<?= $banknote['country_id']; ?>/<?= htmlspecialchars($banknote['img_back']); ?>"
+                                                                                alt="">
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="full-block">
+                                                                    <div class="money-name">
+                                                                        <?php if (!empty($banknote['ref1'])): ?>
+                                                                            <span><?= htmlspecialchars($banknote['ref1']); ?></span>
+                                                                        <?php endif; ?>
+
+                                                                        <?php if (!empty($banknote['ref2'])): ?>
+                                                                            <span><?= htmlspecialchars($banknote['ref2']); ?></span>
+                                                                        <?php endif; ?>
+
+                                                                        <?php if (!empty($banknote['ref3'])): ?>
+                                                                            <span><?= htmlspecialchars($banknote['ref3']); ?></span>
+                                                                        <?php endif; ?>
+
+                                                                        <a href="#"> <?= htmlspecialchars($banknote['name']); ?> </a>
+                                                                    </div>
+                                                                    <div class="money-type">
+                                                                        <span>
+                                                                            <?= $banknote['is_commemorative'] ? 'Commemorative banknote' : 'Standart banknote'; ?>
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="money-issued">
+                                                                        <span><?= htmlspecialchars($banknote['issuer'] ?? ''); ?> </span>
+                                                                    </div>
+                                                                    <table class="table">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Image</th>
+                                                                                <th>Variation</th>
+                                                                                <th>Date</th>
+                                                                                <th>Description</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <div class="table-img">
+                                                                                        <img src="/images/money-back.png" alt="">
+                                                                                        <img src="/images/money-front.png" alt="">
+                                                                                        <div class="modal-body">
+                                                                                            <div class="modal-top row">
+                                                                                                <div class="col-lg-2">
+                                                                                                    <div id="thumbnail-container"
+                                                                                                        class="mod-img">
+                                                                                                        <img src="/images/modal-money-back.png"
+                                                                                                            alt="" class="thumbnail"
+                                                                                                            data-large="/images/modal-money-back.png">
+                                                                                                        <img src="/images/modal-money-front.png"
+                                                                                                            alt="" class="thumbnail"
+                                                                                                            data-large="/images/modal-money-front.png">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-lg-2">
+                                                                                                    <span class="mod-type">P#1(1)</span>
+                                                                                                </div>
+                                                                                                <div class="col-lg-2">
+                                                                                                    <span class="mod-date">1992-May-25</span>
+                                                                                                </div>
+                                                                                                <div class="col-lg-6">
+                                                                                                    <span class="mod-desc">Old spelling of
+                                                                                                        50,000 with 3E. Solid security thread
+                                                                                                        with</span>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="image-popup hidden">
+                                                                                                <img class="image-viewer"
+                                                                                                    src="/images/modal-money-back.png" alt="">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>P#1(1)</td>
+                                                                                <td>1992-May-25</td>
+                                                                                <td>Old spelling of 50,000 with 3E. Solid security thread with
+                                                                                </td>
+                                                                            </tr>
+                                                                            <!-- Repeat the above <tr> block for each row in the table -->
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
                                                             </div>
-                                                            <div class="full-block">
-                                                                <div class="money-name">
-                                                                    <span><?= htmlspecialchars($banknote['ref1'] ?? ''); ?></span>
-                                                                    <span><?= htmlspecialchars($banknote['ref2'] ?? ''); ?></span>
-                                                                    <span><?= htmlspecialchars($banknote['ref3'] ?? ''); ?></span>
-                                                                    <a href="#"> <?= htmlspecialchars($banknote['name']); ?> </a>
-                                                                </div>
-                                                                <div class="money-type">
-                                                                    <span>
-                                                                        <?= $banknote['is_commemorative'] ? 'Commemorative banknote' : 'Standart banknote'; ?>
-                                                                    </span>
-                                                                </div>
-                                                                <div class="money-issued">
-                                                                    <span>Issued by: </span>
-                                                                    <p>Riga City Council</p>
-                                                                </div>
-                                                                <table class="table">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Image</th>
-                                                                            <th>Variation</th>
-                                                                            <th>Date</th>
-                                                                            <th>Description</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <div class="table-img">
-                                                                                    <img src="/images/money-back.png" alt="">
-                                                                                    <img src="/images/money-front.png" alt="">
-
-                                                                                    <div class="modal-body">
-                                                                                        <div class="modal-top row">
-                                                                                            <div class="col-lg-2">
-                                                                                                <div id="thumbnail-container"
-                                                                                                    class="mod-img">
-                                                                                                    <img src="//images/modal-money-back.png"
-                                                                                                        alt="" class="thumbnail"
-                                                                                                        data-large="/images/modal-money-back.png">
-                                                                                                    <img src="/images/modal-money-front.png"
-                                                                                                        alt="" class="thumbnail"
-                                                                                                        data-large="/images/modal-money-front.png">
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-lg-2">
-                                                                                                <span class="mod-type">P#1(1)</span>
-                                                                                            </div>
-                                                                                            <div class="col-lg-2">
-                                                                                                <span class="mod-date">1992-May-25</span>
-                                                                                            </div>
-                                                                                            <div class="col-lg-6">
-                                                                                                <span class="mod-desc">Old spelling of
-                                                                                                    50,000 with 3E. Solid security thread
-                                                                                                    with</span>
-                                                                                            </div>
-                                                                                        </div>
-
-                                                                                        <div class="image-popup hidden">
-                                                                                            <img class="image-viewer"
-                                                                                                src="/images/modal-money-back.png" alt="">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>P#1(1)</td>
-                                                                            <td>1992-May-25</td>
-                                                                            <td>Old spelling of 50,000 with 3E. Solid security thread with
-                                                                            </td>
-                                                                        </tr>
-
-                                                                        <tr>
-                                                                            <td>
-                                                                                <div class="table-img">
-                                                                                    <img src="/images/money-back.png" alt="">
-                                                                                    <img src="/images/money-front.png" alt="">
-                                                                                    <div class="modal-body">
-                                                                                        <div class="modal-top row">
-                                                                                            <div class="col-lg-2">
-                                                                                                <div id="thumbnail-container"
-                                                                                                    class="mod-img">
-                                                                                                    <img src="/images/modal-money-back.png"
-                                                                                                        alt="" class="thumbnail"
-                                                                                                        data-large="/images/modal-money-back.png">
-                                                                                                    <img src="/images/modal-money-front.png"
-                                                                                                        alt="" class="thumbnail"
-                                                                                                        data-large="/images/modal-money-front.png">
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-lg-2">
-                                                                                                <span class="mod-type">P#1(1)</span>
-                                                                                            </div>
-                                                                                            <div class="col-lg-2">
-                                                                                                <span class="mod-date">1992-May-25</span>
-                                                                                            </div>
-                                                                                            <div class="col-lg-6">
-                                                                                                <span class="mod-desc">Old spelling of
-                                                                                                    50,000 with 3E. Solid security thread
-                                                                                                    with</span>
-                                                                                            </div>
-                                                                                        </div>
-
-                                                                                        <div class="image-popup hidden">
-                                                                                            <img class="image-viewer"
-                                                                                                src="/images/modal-money-back.png" alt="">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>P#1(1)</td>
-                                                                            <td>1992-May-25</td>
-                                                                            <td>Watermark: Forward "S" vertical braids pattern</td>
-                                                                        </tr>
-
-                                                                        <tr>
-                                                                            <td>
-                                                                                <div class="table-img">
-                                                                                    <img src="/images/money-back.png" alt="">
-                                                                                    <img src="/images/money-front.png" alt="">
-                                                                                    <div class="modal-body">
-                                                                                        <div class="modal-top row">
-                                                                                            <div class="col-lg-2">
-                                                                                                <div id="thumbnail-container"
-                                                                                                    class="mod-img">
-                                                                                                    <img src="/images/modal-money-back.png"
-                                                                                                        alt="" class="thumbnail"
-                                                                                                        data-large="/images/modal-money-back.png">
-                                                                                                    <img src="/images/modal-money-front.png"
-                                                                                                        alt="" class="thumbnail"
-                                                                                                        data-large="/images/modal-money-front.png">
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-lg-2">
-                                                                                                <span class="mod-type">P#1(1)</span>
-                                                                                            </div>
-                                                                                            <div class="col-lg-2">
-                                                                                                <span class="mod-date">1992-May-25</span>
-                                                                                            </div>
-                                                                                            <div class="col-lg-6">
-                                                                                                <span class="mod-desc">Old spelling of
-                                                                                                    50,000 with 3E. Solid security thread
-                                                                                                    with</span>
-                                                                                            </div>
-                                                                                        </div>
-
-                                                                                        <div class="image-popup hidden">
-                                                                                            <img class="image-viewer"
-                                                                                                src="/images/modal-money-back.png" alt="">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>P#1(1)</td>
-                                                                            <td>1992-May-25</td>
-                                                                            <td>Watermark: Forward "S" vertical braids pattern</td>
-                                                                        </tr>
-
-                                                                        <tr>
-                                                                            <td>
-                                                                                <div class="table-img">
-                                                                                    <img src="/images/money-back.png" alt="">
-                                                                                    <img src="/images/money-front.png" alt="">
-                                                                                    <div class="modal-body">
-                                                                                        <div class="modal-top row">
-                                                                                            <div class="col-lg-2">
-                                                                                                <div id="thumbnail-container"
-                                                                                                    class="mod-img">
-                                                                                                    <img src="/images/modal-money-back.png"
-                                                                                                        alt="" class="thumbnail"
-                                                                                                        data-large="/images/modal-money-back.png">
-                                                                                                    <img src="/images/modal-money-front.png"
-                                                                                                        alt="" class="thumbnail"
-                                                                                                        data-large="/images/modal-money-front.png">
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-lg-2">
-                                                                                                <span class="mod-type">P#1(1)</span>
-                                                                                            </div>
-                                                                                            <div class="col-lg-2">
-                                                                                                <span class="mod-date">1992-May-25</span>
-                                                                                            </div>
-                                                                                            <div class="col-lg-6">
-                                                                                                <span class="mod-desc">Old spelling of
-                                                                                                    50,000 with 3E. Solid security thread
-                                                                                                    with</span>
-                                                                                            </div>
-                                                                                        </div>
-
-                                                                                        <div class="image-popup hidden">
-                                                                                            <img class="image-viewer"
-                                                                                                src="/images/modal-money-back.png" alt="">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>P#1(1)</td>
-                                                                            <td>1992-May-25</td>
-                                                                            <td>Watermark: Forward "S" vertical braids pattern</td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                    <?php endif; ?>
-                                                <?php endforeach; ?>
-                                            </div>
-                                        <?php endif; ?>
-                                    <?php endforeach; ?>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; ?>
+                                                </div>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
+
+
                             </div>
                         </div>
 
@@ -329,18 +214,18 @@ $conn->close();
 
                                 <?php foreach ($currencies as $currency): ?>
                                     <!-- Header Currency -->
-                                    <div class="tab-title">
-                                        <h3 class="title-tab spy" id="currency-<?= $currency['id']; ?>">
-                                            <?php if (!empty($currency['ext_link'])): ?>
-                                                <a href="<?= htmlspecialchars($currency['ext_link']); ?>">
-                                                    <?= htmlspecialchars($currency['ext_link_text']); ?>
-                                                </a>
-                                            <?php else: ?>
-                                                <?= htmlspecialchars($currency['name']); ?>
-                                            <?php endif; ?>
+                                    <div id="soviet" class="tab-title spy" id="currency-<?= $currency['id']; ?>">
+                                        <h3 class="title-tab">
+                                            <?= htmlspecialchars($currency['name']); ?>
                                         </h3>
                                     </div>
-
+                                    <?php if (!empty($currency['ext_link'])): ?>
+                                        <div class="note">
+                                            <a href="<?= htmlspecialchars($currency['ext_link']); ?>">
+                                                <?= htmlspecialchars($currency['ext_link_text']); ?>
+                                            </a>
+                                        </div>
+                                    <?php endif; ?>
                                     <?php foreach ($issues as $issue): ?>
                                         <?php if ($issue['currency_id'] == $currency['id']): ?>
                                             <!-- Header Issue -->
@@ -356,18 +241,24 @@ $conn->close();
                                                             <div class="col-xl-3 col-lg-4 col-md-6">
                                                                 <a href="#!" class="grid-item">
                                                                     <span class="grid-img">
-                                                                        <img src="/images/<?= htmlspecialchars($banknote['img_back']); ?>"
+                                                                        <img src="/banknotes/<?= htmlspecialchars($banknote['country_id']); ?>/<?= htmlspecialchars($banknote['img_front']); ?>"
                                                                             alt="">
-                                                                        <img src="/images/<?= htmlspecialchars($banknote['img_front']); ?>"
+                                                                        <img src="/banknotes/<?= htmlspecialchars($banknote['country_id']); ?>/<?= htmlspecialchars($banknote['img_back']); ?>"
                                                                             alt="">
                                                                     </span>
 
-                                                                    <span
-                                                                        class="grid-tag"><?= htmlspecialchars($banknote['ref1'] ?? ''); ?></span>
-                                                                    <span
-                                                                        class="grid-tag"><?= htmlspecialchars($banknote['ref2'] ?? ''); ?></span>
-                                                                    <span
-                                                                        class="grid-tag"><?= htmlspecialchars($banknote['ref3'] ?? ''); ?></span>
+                                                                    <?php if (!empty($banknote['ref1'])): ?>
+                                                                        <span
+                                                                            class="grid-tag"><?= htmlspecialchars($banknote['ref1'] ?? ''); ?></span>
+                                                                    <?php endif; ?>
+                                                                    <?php if (!empty($banknote['ref2'])): ?>
+                                                                        <span
+                                                                            class="grid-tag"><?= htmlspecialchars($banknote['ref2'] ?? ''); ?></span>
+                                                                    <?php endif; ?>
+                                                                    <?php if (!empty($banknote['ref3'])): ?>
+                                                                        <span
+                                                                            class="grid-tag"><?= htmlspecialchars($banknote['ref3'] ?? ''); ?></span>
+                                                                    <?php endif; ?>
 
                                                                     <span class="grid-text">
                                                                         <span

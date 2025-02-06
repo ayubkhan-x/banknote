@@ -3,10 +3,10 @@ ob_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$host = '';
-$user = '';
-$pass = '';
-$db_name = '';
+$host = 'mysql8';
+$user = '39330634_banknotewiki';
+$pass = 'eWgl1bn8';
+$db_name = '39330634_banknotewiki';
 
 $conn = new mysqli($host, $user, $pass, $db_name);
 
@@ -24,7 +24,7 @@ if (!$slug) {
 }
 
 // Запрос к БД
-$sql = "SELECT id, name, flag_icon, description FROM countries WHERE slug = '$slug'";
+$sql = "SELECT id, name, flag_icon, map_icon, description FROM countries WHERE slug = '$slug'";
 $result = $conn->query($sql);
 
 if ($result->num_rows === 0) {
@@ -32,18 +32,29 @@ if ($result->num_rows === 0) {
 }
 
 $country = $result->fetch_assoc();
+
+// Получение данных о валюте
+$sql_currency = "SELECT * FROM c_currency WHERE country_id = " . $country['id'] . " ORDER BY order_id";
+$currency_result = $conn->query($sql_currency);
+
+// Получение данных о выпусках банкнот
+$sql_banknotes = "SELECT * FROM banknotes WHERE country_id = " . $country['id'];
+$banknotes_result = $conn->query($sql_banknotes);
+
 $conn->close();
 ?>
 
 <section class="banknote-sec" id="spy1">
     <?php include "components/fixed-nav.php"; ?>
     <div class="container">
+        <!-- Flag -->
         <div class="flag">
-            <img src="/images/<?php echo htmlspecialchars($country['flag_icon']); ?>"
+            <img width="78px" height="78px" src="/images/country-flag/<?php echo htmlspecialchars($country['flag_icon']); ?>"
                 alt="<?php echo htmlspecialchars($country['name']); ?>">
         </div>
 
         <div class="inner-block">
+            <!-- Title -->
             <div class="title">
                 <h2 class="title-black">
                     <a href="/"><img src="/images/arrow-back.svg" alt="Back"></a>
@@ -52,14 +63,17 @@ $conn->close();
             </div>
 
             <div class="row">
+                <!-- Map -->
                 <div class="col-lg-3">
                     <div class="money-map">
-                        <img src="/images/globus-img.png" alt="">
+                        <img src="/images/country-map/<?php echo htmlspecialchars($country['map_icon']); ?>"
+                            alt="<?php echo htmlspecialchars($country['name']); ?>">
                     </div>
                 </div>
 
                 <div class="col-lg-9">
                     <div class="money-block">
+                        <!-- Description -->
                         <div class="money-text">
                             <?php echo nl2br(htmlspecialchars($country['description'] ?? 'No description')); ?>
                         </div>

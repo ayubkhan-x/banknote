@@ -4,10 +4,10 @@ header('Content-Type: application/json; charset=UTF-8');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$host = '';
-$user = '';
-$pass = '';
-$db_name = '';
+$host = 'mysql8';
+$user = '39330634_banknotewiki';
+$pass = 'eWgl1bn8';
+$db_name = '39330634_banknotewiki';
 
 $conn = new mysqli($host, $user, $pass, $db_name);
 
