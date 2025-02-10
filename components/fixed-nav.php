@@ -1,39 +1,76 @@
+<?php
+$host = 'mysql8';
+$user = '39330634_banknotewiki';
+$pass = 'eWgl1bn8';
+$db_name = '39330634_banknotewiki';
+
+$conn = new mysqli($host, $user, $pass, $db_name);
+if ($conn->connect_errno) {
+    die("Ошибка подключения: " . $conn->connect_error);
+}
+$conn->set_charset("utf8mb4");
+
+$slug = $conn->real_escape_string($_GET['slug'] ?? '');
+$country_result = $conn->query("SELECT id FROM countries WHERE slug = '$slug' LIMIT 1");
+if (!$country_result || $country_result->num_rows === 0) {
+    die("Страна не найдена.");
+}
+$country_id = $country_result->fetch_assoc()['id'];
+
+// Получаем валюты текущей страны
+$sql_currencies = "SELECT id, name FROM c_currency WHERE country_id = $country_id ORDER BY order_id ASC";
+$currencies = $conn->query($sql_currencies)->fetch_all(MYSQLI_ASSOC);
+
+$currency_ids = array_column($currencies, 'id');
+$issues_by_currency = [];
+if (!empty($currency_ids)) {
+    $sql_issues = "SELECT id, currency_id, name FROM c_issue WHERE currency_id IN (" . implode(',', $currency_ids) . ") ORDER BY order_id ASC";
+    $result = $conn->query($sql_issues);
+    while ($issue = $result->fetch_assoc()) {
+        $issues_by_currency[$issue['currency_id']][] = $issue;
+    }
+}
+
+$conn->close();
+?>
+
 <div class="fixed-nav">
     <div class="fixed-nav-links" id="navbar">
-        <a data-scroll="soviet" href="#soviet" class="nav-line line-20 active"></a>
-        <a data-scroll="first" href="#first" class="nav-line line-20"></a>
-        <a data-scroll="issue" href="#issue" class="nav-line line-16"></a>
-        <a data-scroll="era" href="#era" class="nav-line line-12"></a>
-        <a data-scroll="currency" href="#currency" class="nav-line line-12"></a>
-        <a data-scroll="demonetized" href="#demonetized" class="nav-line line-12"></a>
-        <a data-scroll="commemorative" href="#commemorative" class="nav-line line-12"></a>
-        <a data-scroll="soviet2" href="#soviet2" class="nav-line line-20"></a>
-        <a data-scroll="first2" href="#first2" class="nav-line line-20"></a>
-        <a data-scroll="issue2" href="#issue2" class="nav-line line-16"></a>
-        <a data-scroll="kopek" href="#kopek" class="nav-line line-16"></a>
+        <!-- Сначала выводим все валюты -->
+        <?php foreach ($currencies as $currency): ?>
+            <a data-scroll="currency-<?= $currency['id'] ?>" href="#currency-<?= $currency['id'] ?>"
+                class="nav-line line-12"></a>
+        <?php endforeach; ?>
+
+        <!-- Затем выводим все выпуски -->
+        <?php foreach ($currencies as $currency): ?>
+            <?php if (!empty($issues_by_currency[$currency['id']])): ?>
+                <?php foreach ($issues_by_currency[$currency['id']] as $issue): ?>
+                    <a data-scroll="issue-<?= $issue['id'] ?>" href="#issue-<?= $issue['id'] ?>" class="nav-line line-16"></a>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        <?php endforeach; ?>
     </div>
 
-    <div class="hover-box">
+    <div class="hover-box" style="display: none;">
         <div class="hover-block">
-            <a href="#soviet" class="fixed-nav-link active">Soviet Rouble (1917-1991)</a>
-            <a href="#first" class="fixed-nav-link">First Rouble (1992-2000)</a>
-            <div class="page-info">
-                <a href="#issue" class="fixed-nav-link">1992 Issue</a>
-                <div class="page-inner-info">
-                    <a href="#era">Era</a>
-                    <a href="#currency">Currency</a>
-                    <a href="#demonetized">Demonetized</a>
-                    <a href="#commemorative">Commemorative</a>
+            <?php foreach ($currencies as $currency): ?>
+                <div class="page-info">
+                    <a href="#currency-<?= $currency['id'] ?>" class="fixed-nav-link">
+                        <?= htmlspecialchars($currency['name'], ENT_QUOTES, 'UTF-8') ?>
+                    </a>
                 </div>
-            </div>
-            <a href="#soviet2" class="fixed-nav-link">Soviet Rouble (1917-1991)</a>
-            <div class="page-info">
-                <a href="#first2" class="fixed-nav-link">First Rouble (1992-2000)</a>
-                <div class="page-inner-info">
-                    <a href="#issue2" class="fixed-nav-link">1992 Issue</a>
-                    <a href="#kopek" class="fixed-nav-link">P#23 50 Kopeck 1992</a>
-                </div>
-            </div>
+
+                <?php if (!empty($issues_by_currency[$currency['id']])): ?>
+                    <div class="page-info">
+                        <?php foreach ($issues_by_currency[$currency['id']] as $issue): ?>
+                            <a href="#issue-<?= $issue['id'] ?>" class="fixed-nav-link">
+                                <?= htmlspecialchars($issue['name'], ENT_QUOTES, 'UTF-8') ?>
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
         </div>
     </div>
 </div>

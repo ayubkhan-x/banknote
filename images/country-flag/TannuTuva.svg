@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72">
+  <g id="color">
+    <rect x="5" y="17" width="62" height="38" fill="#61b2e4" stroke-width="0"/>
+    <g>
+      <polygon points="5.0707 17 5 17 5 55 5.0043 55 20.2375 35.9586 5.0707 17" fill="none" stroke-width="0"/>
+      <polygon points="16.5958 17 28.1626 31.4585 67 31.4585 67 17 16.5958 17" fill="none" stroke-width="0"/>
+      <polygon points="16.5293 55 67 55 67 40.4585 28.1625 40.4585 16.5293 55" fill="none" stroke-width="0"/>
+      <polygon points="8.272 17 5.0707 17 20.2375 35.9586 5.0043 55 8.2057 55 23.4387 35.9587 8.272 17" fill="#fff" stroke-width="0"/>
+      <polygon points="13.3279 55 16.5293 55 28.1625 40.4585 67 40.4585 67 37.9585 26.9611 37.9585 13.3279 55" fill="#fff" stroke-width="0"/>
+      <polygon points="16.5958 17 13.3944 17 26.9614 33.9585 67 33.9585 67 31.4585 28.1626 31.4585 16.5958 17" fill="#fff" stroke-width="0"/>
+      <polygon points="13.3944 17 8.272 17 23.4387 35.9587 8.2057 55 13.3279 55 26.9611 37.9585 67 37.9585 67 33.9585 26.9614 33.9585 13.3944 17" fill="#61b2e4" stroke-width="0"/>
+    </g>
+    <polygon points="5 17 20.2375 35.9586 5.0043 55 5 17" fill="#fcea2b" stroke-width="0"/>
+  </g>
+  <g id="frame">
+    <g id="line">
+      <rect x="5" y="17" width="62" height="38" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    </g>
+  </g>
+</svg>

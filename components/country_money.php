@@ -81,8 +81,8 @@ $conn->close();
                 <?php if (empty($currency['ext_link'])): ?>
                     <?php foreach ($issues as $issue): ?>
                         <?php if ($issue['currency_id'] == $currency['id']): ?>
-                            <div class="full-box">
-                                <span class="full-title spy" id="issue-<?= $issue['id']; ?>">
+                            <div class="full-box" id="issue-<?= $issue['id']; ?>">
+                                <span class="full-title spy">
                                     <?= htmlspecialchars($issue['name'] ?? '', ENT_QUOTES, 'UTF-8'); ?>
                                 </span>
 

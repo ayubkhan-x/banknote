@@ -3,7 +3,7 @@ RewriteBase /
 
 # Исключаем главную страницу и файлы, такие как изображения и CSS
 RewriteCond %{REQUEST_URI} !^/$
-RewriteCond %{REQUEST_URI} !\.(jpg|jpeg|png|gif|css|js|ico|html|php)$
+RewriteCond %{REQUEST_URI} !\.(jpg|jpeg|png|gif|css|js|ico|html|php|txt)$
 
 # Перенаправление для запросов вида /slug, например /belarus
 RewriteRule ^([^/]+)$ country.php?slug=$1 [L,QSA]

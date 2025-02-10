@@ -57,7 +57,7 @@ $(function () {
             
             link.removeClass('active');
             $('.fixed-nav-link').removeClass('active');
-    
+            
             $(this).addClass('active');
             $('.fixed-nav-link[href="' + $(this).attr('href') + '"]').addClass('active');
             
