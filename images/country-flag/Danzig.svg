@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72">
+  <g id="color">
+    <rect x="5" y="17" width="62" height="38" fill="#d22f27" stroke-width="0"/>
+  </g>
+  <g id="crown">
+    <polygon points="23.4586 26.5587 23.2787 26.5587 21.8743 24.178 20.4698 26.5587 20.2899 26.5587 18.8854 24.178 17.481 26.5587 17.3011 26.5587 15.8966 24.178 14.4921 26.5587 14.3123 26.5587 12.0856 24.178 12.9078 26.5587 12.9078 29.4962 24.8631 29.4962 24.8631 26.5587 25.6852 24.178 23.4586 26.5587" fill="#fcea2b" stroke-width="0"/>
+    <polygon points="15.8966 21.4621 15.4256 23.2283 14.5723 24.252 15.8966 24.252 17.2208 24.252 16.2991 23.2178 15.8966 21.4621" fill="#fcea2b" stroke-width="0"/>
+    <polygon points="12.0856 21.4621 11.6146 23.2283 12.0856 24.252 12.0856 24.252 13.4098 24.252 12.4881 23.2178 12.0856 21.4621" fill="#fcea2b" stroke-width="0"/>
+    <polygon points="25.6852 21.4621 26.1562 23.2283 25.6852 24.252 25.6852 24.252 24.361 24.252 25.2827 23.2178 25.6852 21.4621" fill="#fcea2b" stroke-width="0"/>
+    <polygon points="18.8854 21.4621 18.4144 23.2283 17.5612 24.252 18.8854 24.252 20.2097 24.252 19.2879 23.2178 18.8854 21.4621" fill="#fcea2b" stroke-width="0"/>
+    <polygon points="21.8743 21.4621 21.4032 23.2283 20.55 24.252 21.8743 24.252 23.1985 24.252 22.2768 23.2178 21.8743 21.4621" fill="#fcea2b" stroke-width="0"/>
+  </g>
+  <g id="cross">
+    <g>
+      <rect x="18.0531" y="30.9444" width="1.6646" height="8.2778" fill="#fff" stroke-width="0"/>
+      <rect x="18.0531" y="30.9444" width="1.6646" height="8.2778" transform="translate(-16.1979 53.9687) rotate(-90)" fill="#fff" stroke-width="0"/>
+    </g>
+    <g>
+      <rect x="18.0531" y="40.6704" width="1.6646" height="8.2778" fill="#fff" stroke-width="0"/>
+      <rect x="18.0531" y="40.6704" width="1.6646" height="8.2778" transform="translate(-25.9239 63.6947) rotate(-90)" fill="#fff" stroke-width="0"/>
+    </g>
+  </g>
+  <g id="frame">
+    <g id="line">
+      <rect x="5" y="17" width="62" height="38" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    </g>
+  </g>
+</svg>

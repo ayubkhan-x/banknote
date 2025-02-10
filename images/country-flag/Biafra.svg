@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72">
+  <g id="three_colors" data-name="three colors">
+    <g>
+      <rect x="5" y="17" width="62" height="12.6666" fill="#d22f27" stroke-width="0"/>
+      <rect x="5" y="29.6666" width="62" height="12.6667" stroke-width="0"/>
+      <rect x="5" y="42.3333" width="62" height="12.6667" fill="#5c9e31" stroke-width="0"/>
+    </g>
+  </g>
+  <g id="sun">
+    <g>
+      <polygon points="30.0844 38.3182 28.4675 37.0802 30.4864 36.8148 29.2476 35.1986 31.2663 35.4668 30.4873 33.5853 32.3687 34.3645 32.1007 32.3459 33.7166 33.5848 33.982 31.566 35.2198 33.183 36 31.3021 36.7803 33.183 38.0183 31.5661 38.2837 33.585 39.8999 32.3462 39.6317 34.3649 41.5132 33.5859 40.734 35.4673 42.7527 35.1993 41.5137 36.8152 43.5325 37.0806 41.9155 38.3184 30.0844 38.3182" fill="#fcea2b" stroke-width="0"/>
+      <rect x="30.0844" y="39.5081" width="11.7121" height="1.1899" fill="#fcea2b" stroke-width="0"/>
+    </g>
+  </g>
+  <g id="frame">
+    <g id="line">
+      <rect x="5" y="17" width="62" height="38" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    </g>
+  </g>
+</svg>

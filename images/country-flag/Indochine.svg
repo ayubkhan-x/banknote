@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72">
+  <g id="color">
+    <rect x="5" y="17" width="62" height="38" fill="#fcea2b" stroke-width="0"/>
+  </g>
+  <g id="three_colors" data-name="three colors">
+    <g>
+      <rect x="5.9723" y="17.4724" width="7.6583" height="14.6665" fill="#1e50a0" stroke-width="0"/>
+      <rect x="13.6306" y="17.4724" width="7.6584" height="14.6665" fill="#fff" stroke-width="0"/>
+      <rect x="21.289" y="17.4724" width="7.6584" height="14.6665" fill="#d22f27" stroke-width="0"/>
+    </g>
+  </g>
+  <g id="frame">
+    <g id="line">
+      <rect x="5" y="17" width="62" height="38" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    </g>
+  </g>
+</svg>

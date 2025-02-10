@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72">
+  <g id="color">
+    <g>
+      <rect x="5" y="17" width="62" height="12.6666" fill="#d22f27" stroke-width="0"/>
+      <rect x="5" y="42.3333" width="62" height="12.6667" fill="#f1b31c" stroke-width="0"/>
+      <rect x="5" y="29.6666" width="62" height="12.6667" fill="#1e50a0" stroke-width="0"/>
+    </g>
+    <rect x="56.7645" y="17" width="9.2355" height="4.2235" fill="#fff" stroke-width="0"/>
+    <rect x="52.1467" y="21.2236" width="9.2355" height="4.2235" fill="#fff" stroke-width="0"/>
+    <rect x="47.5289" y="25.4471" width="9.2355" height="4.2235" fill="#fff" stroke-width="0"/>
+    <rect x="44.1763" y="29.6706" width="9.2355" height="4.2235" fill="#fff" stroke-width="0"/>
+    <rect x="56.8194" y="50.7381" width="9.1806" height="4.1984" fill="#fff" stroke-width="0"/>
+    <rect x="52.2292" y="46.5397" width="9.1806" height="4.1984" fill="#fff" stroke-width="0"/>
+    <rect x="47.6389" y="42.3413" width="9.1806" height="4.1984" fill="#fff" stroke-width="0"/>
+    <rect x="44.1763" y="38.1177" width="9.2355" height="4.2235" fill="#fff" stroke-width="0"/>
+    <rect x="39.5585" y="33.8942" width="9.2355" height="4.2235" fill="#fff" stroke-width="0"/>
+  </g>
+  <g id="frame">
+    <g id="line">
+      <rect x="5" y="17" width="62" height="38" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    </g>
+  </g>
+</svg>
