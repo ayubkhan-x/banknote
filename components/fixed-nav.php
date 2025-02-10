@@ -36,17 +36,14 @@ $conn->close();
 
 <div class="fixed-nav">
     <div class="fixed-nav-links" id="navbar">
-        <!-- Сначала выводим все валюты -->
         <?php foreach ($currencies as $currency): ?>
-            <a data-scroll="currency-<?= $currency['id'] ?>" href="#currency-<?= $currency['id'] ?>"
-                class="nav-line line-12"></a>
-        <?php endforeach; ?>
-
-        <!-- Затем выводим все выпуски -->
-        <?php foreach ($currencies as $currency): ?>
+            <!-- Выводим валюту -->
+            <a data-scroll="currency-<?= $currency['id'] ?>" href="#currency-<?= $currency['id'] ?>" class="nav-line line-20"></a>
+            
+            <!-- Выводим выпуски для текущей валюты -->
             <?php if (!empty($issues_by_currency[$currency['id']])): ?>
                 <?php foreach ($issues_by_currency[$currency['id']] as $issue): ?>
-                    <a data-scroll="issue-<?= $issue['id'] ?>" href="#issue-<?= $issue['id'] ?>" class="nav-line line-16"></a>
+                    <a data-scroll="issue-<?= $issue['id'] ?>" href="#issue-<?= $issue['id'] ?>" class="nav-line line-12"></a>
                 <?php endforeach; ?>
             <?php endif; ?>
         <?php endforeach; ?>
@@ -59,17 +56,16 @@ $conn->close();
                     <a href="#currency-<?= $currency['id'] ?>" class="fixed-nav-link">
                         <?= htmlspecialchars($currency['name'], ENT_QUOTES, 'UTF-8') ?>
                     </a>
+                    
+                    <!-- Выводим выпуски для текущей валюты -->
+                    <?php if (!empty($issues_by_currency[$currency['id']])): ?>
+                        <div class="page-inner-info">
+                            <?php foreach ($issues_by_currency[$currency['id']] as $issue): ?>
+                                <a href="#issue-<?= $issue['id'] ?>"><?= htmlspecialchars($issue['name'], ENT_QUOTES, 'UTF-8') ?></a>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
-
-                <?php if (!empty($issues_by_currency[$currency['id']])): ?>
-                    <div class="page-info">
-                        <?php foreach ($issues_by_currency[$currency['id']] as $issue): ?>
-                            <a href="#issue-<?= $issue['id'] ?>" class="fixed-nav-link">
-                                <?= htmlspecialchars($issue['name'], ENT_QUOTES, 'UTF-8') ?>
-                            </a>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
             <?php endforeach; ?>
         </div>
     </div>
