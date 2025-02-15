@@ -1,15 +1,15 @@
 <footer class="footer">
     <div class="container">
         <div class="ftr-top">
-            <a href="#!" class="ftr-logo">Banknote.wiki</a>
+            <a href="#!" class="ftr-logo">banknote.wiki</a>
             <div class="ftr-title">
                 <div class="ftr-title-item">
-                    <p>Title</p>
-                    <span>78</span>
+                    <p>Countries</p>
+                    <span>284</span>
                 </div>
                 <div class="ftr-title-item">
-                    <p>Title</p>
-                    <span>56</span>
+                    <p>Banknotes</p>
+                    <span>406,876</span>
                 </div>
             </div>
         </div>
@@ -19,8 +19,13 @@
                 <div class="col-lg-4">
                     <div class="ftr-about">
                         <span class="ftr-title">About Us</span>
-                        <p>It is a long established fact that a reader will be distracted by the readable content of a
-                            page when looking at its layout. The point of using Lorem Ipsum is that it has</p>
+                        <p>Welcome to <b>banknote.wiki</b>, your ultimate online catalog for paper money collectors and enthusiasts! Explore a vast collection of banknotes from around the world, featuring historical, modern, and rare currency.<br>
+                        <br>
+                        ✔ Detailed descriptions and high-quality images<br>
+                        ✔ Organized by country, era, and denomination<br>
+                        ✔ Collector insights on history, design, and value<br>
+                        <br>
+                        Start browsing today and discover the beauty of world paper money!</p>
                     </div>
                 </div>
                 <div class="col-lg-4 offset-1">
@@ -33,6 +38,7 @@
                                     <a href="#!" class="menu-link">Link title</a>
                                     <a href="#!" class="menu-link">Link title</a>
                                     <a href="#!" class="menu-link">Link title</a>
+                                    <a href="#!" class="menu-link">Link title</a>
                                 </div>
                             </div>
                         </div>
@@ -40,6 +46,7 @@
                             <div class="ftr-menu">
                                 <p>Title</p>
                                 <div class="menu-items">
+                                    <a href="#!" class="menu-link">Link title</a>
                                     <a href="#!" class="menu-link">Link title</a>
                                     <a href="#!" class="menu-link">Link title</a>
                                     <a href="#!" class="menu-link">Link title</a>
@@ -53,7 +60,7 @@
         </div>
 
         <div class="ftr-end">
-            <span>© Copyright 2024 || All rights reserved by Banknote.wiki</span>
+            <span>© Copyright 2025 || All rights reserved by banknote.wiki</span>
         </div>
     </div>
 </footer>

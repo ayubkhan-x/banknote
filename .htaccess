@@ -1,9 +1,12 @@
 RewriteEngine On
 RewriteBase /
 
-# Исключаем главную страницу и файлы, такие как изображения и CSS
+# Исключаем главную страницу и файлы
 RewriteCond %{REQUEST_URI} !^/$
-RewriteCond %{REQUEST_URI} !\.(jpg|jpeg|png|gif|css|js|ico|html|php|txt)$
+RewriteCond %{REQUEST_URI} !\.(jpg|jpeg|png|svg|gif|css|js|ico|html|php|txt)$
 
-# Перенаправление для запросов вида /slug, например /belarus
+# Перенаправление для страны: /belarus
 RewriteRule ^([^/]+)$ country.php?slug=$1 [L,QSA]
+
+# Перенаправление для банкнот с ID: /belarus/ref-string-id
+RewriteRule ^([a-zA-Z0-9_-]+)/(.+)-(\d+)$ banknote.php?slug=$1&id=$3 [L,QSA]

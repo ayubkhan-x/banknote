@@ -58,6 +58,7 @@ if (!empty($issue_ids)) {
 
 $conn->close();
 ?>
+
 <div class="tab-content" id="pills-tabContent">
     <div class="tab-pane fade show active" id="pills-full" role="tabpanel">
         <div class="tab-block">
@@ -106,19 +107,28 @@ $conn->close();
                                             <div class="full-block">
                                                 <div class="money-name">
                                                     <?php if (!empty($banknote['ref1'])): ?>
-                                                        <span><?= htmlspecialchars($banknote['ref1'] ?? '', ENT_QUOTES, 'UTF-8'); ?></span>
+                                                        <span><?= htmlspecialchars($banknote['ref1'], ENT_QUOTES, 'UTF-8'); ?></span>
                                                     <?php endif; ?>
 
                                                     <?php if (!empty($banknote['ref2'])): ?>
-                                                        <span><?= htmlspecialchars($banknote['ref2'] ?? '', ENT_QUOTES, 'UTF-8'); ?></span>
+                                                        <span><?= htmlspecialchars($banknote['ref2'], ENT_QUOTES, 'UTF-8'); ?></span>
                                                     <?php endif; ?>
 
                                                     <?php if (!empty($banknote['ref3'])): ?>
-                                                        <span><?= htmlspecialchars($banknote['ref3'] ?? '', ENT_QUOTES, 'UTF-8'); ?></span>
+                                                        <span><?= htmlspecialchars($banknote['ref3'], ENT_QUOTES, 'UTF-8'); ?></span>
                                                     <?php endif; ?>
 
-                                                    <a href="#"> <?= htmlspecialchars($banknote['name'] ?? '', ENT_QUOTES, 'UTF-8'); ?> </a>
+                                                    <?php
+                                                    $ref_parts = array_filter([$banknote['ref1'], $banknote['ref2'], $banknote['ref3'], $banknote['name']]);
+                                                    $ref_string = str_replace(['#', ' '], ['', '-'], implode('-', $ref_parts));
+                                                    ?>
+                                                    <a href="/<?= htmlspecialchars($slug, ENT_QUOTES, 'UTF-8'); ?>/<?= htmlspecialchars($ref_string, ENT_QUOTES, 'UTF-8'); ?>-<?= $banknote['id']; ?>">
+                                                        <?= htmlspecialchars($banknote['name'] ?? '', ENT_QUOTES, 'UTF-8'); ?>
+                                                    </a>
+
                                                 </div>
+
+
                                                 <div class="money-type">
                                                     <span>
                                                         <?= $banknote['is_commemorative'] ? 'Commemorative banknote' : 'Standart banknote'; ?>

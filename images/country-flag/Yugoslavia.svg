@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72">
+  <g id="three_colors" data-name="three colors">
+    <g>
+      <rect x="5" y="17" width="62" height="12.6666" fill="#1e50a0" stroke-width="0"/>
+      <rect x="5" y="29.6666" width="62" height="12.6667" fill="#fff" stroke-width="0"/>
+      <rect x="5" y="42.3333" width="62" height="12.6667" fill="#d22f27" stroke-width="0"/>
+    </g>
+  </g>
+  <g id="star">
+    <g>
+      <polygon points="36 24.3275 38.5705 32.2387 46.8889 32.2387 40.1592 37.1281 42.7297 45.0394 36 40.15 29.2703 45.0394 31.8408 37.1281 25.1111 32.2387 33.4295 32.2387 36 24.3275" fill="#d22f27" stroke-width="0"/>
+      <path d="m43.519,46.1265l-7.519-5.4634-7.519,5.4634,2.8716-8.8398-7.519-5.4629h9.2944l2.8721-8.8398,2.8721,8.8398h9.2944l-7.519,5.4629,2.8716,8.8398Zm-7.519-6.4897l5.9399,4.3159-2.269-6.9834,5.9399-4.3154h-7.3423l-2.2686-6.9824-2.2686,6.9824h-7.3423l5.9399,4.3154-2.269,6.9834,5.9399-4.3159Z" fill="#fcea2b" stroke-width="0"/>
+    </g>
+  </g>
+  <g id="frame">
+    <g id="line">
+      <rect x="5" y="17" width="62" height="38" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    </g>
+  </g>
+</svg>
