@@ -12,10 +12,12 @@
 								<div class="main-brands">
 									<span>Trusted by:</span>
 									<div class="main-brands-img">
-										<img src="images/main-brand1.png" alt="">
-										<img src="images/main-brand2.png" alt="">
-										<img src="images/main-brand3.png" alt="">
-										<img src="images/main-brand4.png" alt="">
+										<a href="https://www.trustpilot.com/review/banknote.wiki"><img src="images/main-brand1.png?1" alt=""></a>
+										<img src="images/main-brand2.png?2" alt="">
+										<img src="images/main-brand3.png?3" alt="">
+										<img src="images/main-brand4.png?4" alt="">
+										<img src="images/main-brand5.png?5" alt="">
+										<img src="images/main-brand6.png?6" alt="">
 									</div>
 								</div>
 							</div>

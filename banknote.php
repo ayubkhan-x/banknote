@@ -108,14 +108,13 @@ include('components/header_country.php');
                         <div class="col-xl-3 col-lg-6">
                             <div class="varieties-img">
                                 <span><img width="222"
-                                        src="/banknotes/<?= $banknote['country_id']; ?>/<?= htmlspecialchars($banknote['img_back'] ?? 'default-back.jpg', ENT_QUOTES, 'UTF-8'); ?>"
+                                        src="/banknotes/<?= $banknote['country_id']; ?>/<?= htmlspecialchars($banknote['img_front'] ?? 'default-front.jpg', ENT_QUOTES, 'UTF-8'); ?>"
                                         alt=""></span>
                                 <span><img width="222"
-                                        src="/banknotes/<?= $banknote['country_id']; ?>/<?= htmlspecialchars($banknote['img_front'] ?? 'default-front.jpg', ENT_QUOTES, 'UTF-8'); ?>"
+                                        src="/banknotes/<?= $banknote['country_id']; ?>/<?= htmlspecialchars($banknote['img_back'] ?? 'default-back.jpg', ENT_QUOTES, 'UTF-8'); ?>"
                                         alt=""></span>
                             </div>
                         </div>
-
                         <div class="col-xl-5 col-lg-6">
                             <div class="varieties-desc">
                                 <div class="desc-text">
@@ -143,7 +142,8 @@ include('components/header_country.php');
                                 <div class="properties-list">
                                     <div class="properties-item">
                                         <span>Country</span>
-                                        <p><img src="<?= htmlspecialchars($flag_icon, ENT_QUOTES, 'UTF-8'); ?>" alt="">
+                                        <p><img width="25" height="25"
+                                                src="<?= htmlspecialchars($flag_icon, ENT_QUOTES, 'UTF-8'); ?>" alt="">
                                             <?= htmlspecialchars($country_name, ENT_QUOTES, 'UTF-8'); ?></p>
                                     </div>
                                     <div class="properties-item">
@@ -179,28 +179,22 @@ include('components/header_country.php');
                         </div>
                     </div>
                 </div>
-
-                <div class="money-name">
-                    <?php if (!empty($banknote['ref1'])): ?>
-                        <span><?= htmlspecialchars($banknote['ref1'], ENT_QUOTES, 'UTF-8'); ?></span>
-                    <?php endif; ?>
-
-                    <?php if (!empty($banknote['ref2'])): ?>
-                        <span><?= htmlspecialchars($banknote['ref2'], ENT_QUOTES, 'UTF-8'); ?></span>
-                    <?php endif; ?>
-
-                    <?php if (!empty($banknote['ref3'])): ?>
-                        <span><?= htmlspecialchars($banknote['ref3'], ENT_QUOTES, 'UTF-8'); ?></span>
-                    <?php endif; ?>
-
+                <?php include "components/tab-navbar.php"; ?>
+                <!-- Добавьте этот контейнер после подключения навигации -->
+                <div class="tab-content" id="tabContent">
                     <?php
-                    $ref_parts = array_filter([$banknote['ref1'], $banknote['ref2'], $banknote['ref3'], $banknote['banknote_name']]);
-                    $ref_string = str_replace(['#', ' '], ['', '-'], implode('-', $ref_parts));
+                    $tab = $_GET['tab'] ?? 'varieties';
+                    $componentMap = [
+                        'varieties' => 'banknote-varieties',
+                        'valuation' => 'banknote-valuation',
+                        'description' => 'banknote-description',
+                        'watermark' => 'banknote-watermark',
+                        'buysell' => 'banknote-buysell'
+                    ];
+
+                    $component = $componentMap[$tab] ?? 'banknote-varieties';
+                    include("components/$component.php");
                     ?>
-                    <a
-                        href="/<?= htmlspecialchars($slug, ENT_QUOTES, 'UTF-8'); ?>/<?= htmlspecialchars($ref_string, ENT_QUOTES, 'UTF-8'); ?>-<?= $banknote['banknote_id']; ?>">
-                        <?= htmlspecialchars($banknote['banknote_name'] ?? '', ENT_QUOTES, 'UTF-8'); ?>
-                    </a>
                 </div>
             </div>
         </section>

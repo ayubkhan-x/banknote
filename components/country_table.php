@@ -55,46 +55,45 @@ $conn->close();
             <tr>
                 <td>
                     <div class="table-img">
-                        <img src="/banknotes/<?= htmlspecialchars($variety['country_id']) ?>/<?= htmlspecialchars($variety['img_front']) ?>"
+                        <img src="/banknotes/<?= htmlspecialchars($variety['country_id'] ?? '') ?>/<?= htmlspecialchars($variety['img_front'] ?? '') ?>"
                             alt="">
-                        <img src="/banknotes/<?= htmlspecialchars($variety['country_id']) ?>/<?= htmlspecialchars($variety['img_back']) ?>"
+                        <img src="/banknotes/<?= htmlspecialchars($variety['country_id'] ?? '') ?>/<?= htmlspecialchars($variety['img_back'] ?? '') ?>"
                             alt="">
                         <div class="modal-body">
                             <div class="modal-top row">
                                 <div class="col-lg-2">
                                     <div id="thumbnail-container" class="mod-img">
-                                        <img src="/banknotes/<?= htmlspecialchars($variety['country_id']) ?>/<?= htmlspecialchars($variety['img_front']) ?>"
+                                        <img src="/banknotes/<?= htmlspecialchars($variety['country_id'] ?? '') ?>/<?= htmlspecialchars($variety['img_front'] ?? '') ?>"
                                             alt="" class="thumbnail"
-                                            data-large="/banknotes/<?= htmlspecialchars($variety['country_id']) ?>/<?= htmlspecialchars($variety['img_front']) ?>">
-                                        <img src="/banknotes/<?= htmlspecialchars($variety['country_id']) ?>/<?= htmlspecialchars($variety['img_back']) ?>"
+                                            data-large="/banknotes/<?= htmlspecialchars($variety['country_id'] ?? '') ?>/<?= htmlspecialchars($variety['img_front'] ?? '') ?>">
+                                        <img src="/banknotes/<?= htmlspecialchars($variety['country_id'] ?? '') ?>/<?= htmlspecialchars($variety['img_back'] ?? '') ?>"
                                             alt="" class="thumbnail"
-                                            data-large="/banknotes/<?= htmlspecialchars($variety['country_id']) ?>/<?= htmlspecialchars($variety['img_back']) ?>">
+                                            data-large="/banknotes/<?= htmlspecialchars($variety['country_id'] ?? '') ?>/<?= htmlspecialchars($variety['img_back'] ?? '') ?>">
                                     </div>
-
                                 </div>
                                 <div class="col-lg-2">
-                                    <span class="mod-type"><?= htmlspecialchars($variety['pick_num']) ?? '' ?></span>
+                                    <span class="mod-type"><?= htmlspecialchars($variety['pick_num'] ?? '') ?></span>
                                 </div>
                                 <div class="col-lg-2">
-                                    <span class="mod-date"><?= htmlspecialchars($variety['issue_date']) ?? '' ?></span>
+                                    <span class="mod-date"><?= htmlspecialchars($variety['issue_date'] ?? '') ?></span>
                                 </div>
                                 <div class="col-lg-6">
                                     <span
-                                        class="mod-desc"><?= htmlspecialchars($variety['description_short']) ?? '' ?></span>
+                                        class="mod-desc"><?= htmlspecialchars($variety['description_short'] ?? '') ?></span>
                                 </div>
                             </div>
                             <div class="image-popup hidden">
                                 <img class="image-viewer"
-                                    src="/banknotes/<?= htmlspecialchars($variety['country_id']) ?>/<?= htmlspecialchars($variety['img_front']) ?>"
+                                    src="/banknotes/<?= htmlspecialchars($variety['country_id'] ?? '') ?>/<?= htmlspecialchars($variety['img_front'] ?? '') ?>"
                                     alt="">
                             </div>
                         </div>
                     </div>
                 </td>
-                <td><?= htmlspecialchars($variety['pick_num']) ?? '' ?></td>
-                <td><?= htmlspecialchars($variety['issue_date']) ?? '' ?></td>
-                <td class="desc-hover" data-desc="<?= htmlspecialchars($variety['description_long']) ?? '' ?>">
-                    <?= htmlspecialchars($variety['description_short']) ?? '' ?>
+                <td><?= htmlspecialchars($variety['pick_num'] ?? '') ?></td>
+                <td><?= htmlspecialchars($variety['issue_date'] ?? '') ?></td>
+                <td class="desc-hover" data-desc="<?= htmlspecialchars($variety['description_long'] ?? '') ?>">
+                    <?= htmlspecialchars($variety['description_short'] ?? '') ?>
                 </td>
             </tr>
         <?php endforeach; ?>
